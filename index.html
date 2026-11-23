@@ -108,7 +108,7 @@
   .env.adopted{cursor:default}
   .env.adopted .env-body{filter:saturate(.35)}
   .env.adopted .open{visibility:hidden}
-  .stamp{position:absolute;z-index:4;left:50%;top:44%;transform:translate(-50%,-50%) rotate(-12deg);border:4px solid var(--red);color:var(--red);background:rgba(255,255,255,.92);font-family:'Baloo 2';font-weight:800;font-size:20px;line-height:1;padding:8px 12px 6px;border-radius:12px;letter-spacing:1px;box-shadow:0 0 0 3px rgba(255,255,255,.9);white-space:nowrap}
+  .stamp{position:absolute;z-index:4;left:50%;top:44%;transform:translate(-50%,-50%) rotate(-12deg);border:4px solid var(--green);color:var(--green);background:rgba(240,253,244,.95);font-family:'Baloo 2';font-weight:800;font-size:20px;line-height:1;padding:8px 12px 6px;border-radius:12px;letter-spacing:1px;box-shadow:0 0 0 3px rgba(255,255,255,.9);white-space:nowrap}
   .stamp small{display:block;font-size:12px;letter-spacing:.5px;font-family:'Nunito';margin-top:2px}
 
   /* ---------- MODAL ---------- */
@@ -157,6 +157,14 @@
   .done .em{font-size:62px;line-height:1}
   .done h3{font-size:30px;color:var(--navy);margin-top:8px}
   .done p{color:var(--muted);font-size:17px}
+  .mailfly{position:relative;height:70px;margin:14px auto 6px;max-width:320px}
+  .mailfly span{position:absolute;top:14px;font-size:38px}
+  .mailfly .elf{left:0}
+  .mailfly .box{right:0}
+  .mailfly .letter-fly{left:44px;font-size:30px;animation:fly 2.4s ease-in-out infinite}
+  @keyframes fly{0%{left:44px;top:18px;transform:rotate(-10deg)}50%{top:-6px;transform:rotate(10deg)}90%,100%{left:calc(100% - 80px);top:18px;transform:rotate(0);opacity:1}}
+  .mailnote{background:linear-gradient(135deg,#e8efff,#fde8ef);border:2px dashed var(--navy-2);border-radius:16px;padding:14px 16px;color:var(--ink);font-size:16px;line-height:1.5;text-align:left}
+  .mailnote .spam{margin-top:10px;font-size:14px;color:var(--muted)}
   .done .remind{background:#fff3d6;border-radius:14px;padding:12px 14px;color:#7a4b00;font-weight:700;margin:16px 0}
 
   .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:14px;font-weight:700;z-index:80;display:none;max-width:90vw}
@@ -594,7 +602,12 @@
     show(
       '<div class="done"><div class="em">🎉⭐🎁</div>'+
       '<h3>Obrigado! '+esc(c.primeiroNome)+' agora tem padrinho/madrinha!</h3>'+
-      '<p>'+(enviado?'Enviamos um e-mail para <b>'+esc(email)+'</b> com a cartinha completa, os tamanhos e todas as informações de entrega. Confira também a caixa de spam.':'Seu apadrinhamento foi registrado! Não conseguimos enviar o e-mail agora, então anote as informações abaixo ou fale com a gente pelo WhatsApp.')+'</p>'+
+      (enviado
+        ? '<div class="mailfly" aria-hidden="true"><span class="elf">🧝</span><span class="letter-fly">💌</span><span class="box">📬</span></div>'+
+          '<div class="mailnote"><b>Um duende-carteiro já saiu voando com um e-mail para você!</b> ✨<br>'+
+          'A gente sabe como o fim de ano é corrido 🏃🎄, então mandamos para <b>'+esc(email)+'</b> a cartinha completa d'+(c.genero==='F'?'a ':'o ')+esc(c.primeiroNome)+', os tamanhos, o endereço e o prazo. Assim não tem como esquecer!'+
+          '<div class="spam">🔎 Não chegou? Dá uma espiadinha no spam. Às vezes os duendes se perdem no caminho! 😅</div></div>'
+        : '<p>Seu apadrinhamento foi registrado! Não conseguimos enviar o e-mail agora, então anote as informações abaixo ou fale com a gente pelo WhatsApp.</p>')+
       '<div class="remind">📅 Entregue o presente até <b>4 de dezembro</b><br>📍 R. Nicolau Coelho, 58 - Vila Ipiranga, Porto Alegre<br>🕗 Seg. a sex., das 8:30 às 16:50 · 📞 (51) 98311-0020</div>'+
       '<button class="btn btn-primary" data-close>Voltar às cartinhas</button></div>'
     );
