@@ -1,6 +1,6 @@
 # Como publicar
 
-A página fica no **GitHub Pages** (repositório `thiagoflach/cartinhas-natal`).
+A página fica no **GitHub Pages** (repositório `thiagoflach/cartinhas-natal-educandario`).
 A planilha e os e-mails ficam com um **Google Apps Script** na sua conta Google, que funciona como a "API" da página.
 O GitHub não consegue gravar na planilha nem mandar e-mail, por isso as duas partes são necessárias.
 
@@ -23,7 +23,7 @@ Os e-mails de confirmação saem do Gmail da conta que fez a implantação, com 
 ## Parte 2: GitHub Pages
 
 Em **Settings > Pages** do repositório: Source = "Deploy from a branch", Branch = `main`, pasta `/ (root)`.
-O link fica: `https://thiagoflach.github.io/cartinhas-natal/`
+O link fica: `https://thiagoflach.github.io/cartinhas-natal-educandario/`
 
 ## Depois de publicado
 - Se mudar o Code.gs: **Implantar > Gerenciar implantações > editar (lápis) > Versão: Nova versão**. Assim o link `/exec` continua o mesmo.
