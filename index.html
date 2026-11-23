@@ -440,12 +440,11 @@
   if (DEMO){ document.body.insertAdjacentHTML('beforeend','<div class="demo-flag">PRÉ-VISUALIZAÇÃO · nada é salvo</div>'); }
 
   // ---------- Bonequinhos ----------
-  var SKIN=['#f9d7b5','#f1c39a','#d9a077','#b97a4f','#8d5a3b','#6b4128'];
   var HAIR=['#2b1b12','#4a2c17','#7b4a24','#1a1a1a','#a0522d','#3d2314'];
   var ENV=[['#ffd1dc','#ff8fab'],['#c9f2d6','#5fd38d'],['#ffe8a8','#ffc83d'],['#d6e0ff','#8ea6ff'],['#e9d5ff','#b388ff'],['#ffd8bf','#ff9f68'],['#c7f0ff','#5ccbf5']];
   function hash(s){var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0}return Math.abs(h)}
   function avatar(c){
-    var h=hash(c.nomeExibicao), skin=SKIN[h%SKIN.length], hair=HAIR[(h>>3)%HAIR.length], girl=c.genero==='F';
+    var h=hash(c.nomeExibicao), skin='#d9a077', hair=HAIR[(h>>3)%HAIR.length], girl=c.genero==='F';
     var bg=['#fff3d6','#e8f7ff','#fde8ef','#eafbe9'][(h>>5)%4];
     var s='<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>';
     if (girl){
