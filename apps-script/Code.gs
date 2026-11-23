@@ -1,4 +1,7 @@
 /**
+ * @OnlyCurrentDoc
+ * (Esta anotação faz o Google pedir acesso SOMENTE a esta planilha, e não a todas as suas.)
+ *
  * Campanha de Apadrinhamento das Cartinhas de Natal (2026)
  * Educandário São Luiz — Porto Alegre/RS
  *
@@ -13,7 +16,6 @@
 
 // ===================== CONFIGURAÇÃO =====================
 var CONFIG = {
-  SPREADSHEET_ID: '1yK_ERwGM15ayvlARAcnNXpbKZvSu5DI0nqOt8RQ605A',
   SHEET_NAME: 'Plan1',
   FIRST_DATA_ROW: 3,           // linha 1 = "PADRINHO / MADRINHA", linha 2 = cabeçalhos
   COL: {                       // números de coluna (A = 1)
@@ -21,9 +23,8 @@ var CONFIG = {
     DESEJO1: 6, DESEJO2: 7, DESEJO3: 8,
     PADRINHO_NOME: 9, PADRINHO_EMAIL: 10, PADRINHO_TELEFONE: 11
   },
-  // Envia uma cópia oculta de cada confirmação para o dono do script
-  // (a conta Google que publicou). Coloque false para desligar.
-  ENVIAR_COPIA_PARA_ORGANIZACAO: true,
+  // E-mail que recebe uma cópia oculta de cada confirmação ('' = nenhum).
+  EMAIL_COPIA: '',
   NOME_REMETENTE: 'Cartinhas de Natal · Educandário São Luiz',
   CONTATO_TELEFONE: '(51) 98311-0020',
   CONTATO_WHATSAPP: '5551983110020',
@@ -86,7 +87,7 @@ function doPost(e) {
 
 // ===================== LEITURA =====================
 function getSheet_() {
-  return SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID).getSheetByName(CONFIG.SHEET_NAME);
+  return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.SHEET_NAME);
 }
 
 function semAcento_(s) {
@@ -280,10 +281,7 @@ function enviarEmailConfirmacao_(crianca, padrinho) {
     htmlBody: html,
     name: CONFIG.NOME_REMETENTE
   };
-  if (CONFIG.ENVIAR_COPIA_PARA_ORGANIZACAO) {
-    var dono = Session.getEffectiveUser().getEmail();
-    if (dono) opcoes.bcc = dono;
-  }
+  if (CONFIG.EMAIL_COPIA) opcoes.bcc = CONFIG.EMAIL_COPIA;
   MailApp.sendEmail(opcoes);
 }
 
