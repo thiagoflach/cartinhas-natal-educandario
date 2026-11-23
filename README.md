@@ -1,24 +1,26 @@
 # Como publicar
 
 A página fica no **GitHub Pages** (repositório `thiagoflach/cartinhas-natal-educandario`).
-A planilha e os e-mails ficam com um **Google Apps Script** na sua conta Google, que funciona como a "API" da página.
+A planilha e os e-mails ficam com um **Google Apps Script** publicado pelo Gmail da campanha, que funciona como a "API" da página.
 O GitHub não consegue gravar na planilha nem mandar e-mail, por isso as duas partes são necessárias.
 
-## Parte 1: Apps Script (só você consegue fazer, uns 5 minutos)
+## Parte 1: Apps Script com o Gmail da campanha
 
-1. Abra a planilha **2026 - Cartinhas de Natal** > **Extensões > Apps Script**.
-2. No arquivo `Código.gs`, apague tudo e cole o conteúdo de **Code.gs** (está no repositório, em `apps-script/Code.gs`).
-3. Salve. No menu de funções lá em cima, escolha **testarLeitura** e clique em **Executar**.
-   O Google vai pedir autorização: escolha sua conta > "Avançado" > "Acessar projeto (não seguro)" > Permitir.
-   (O aviso aparece porque o script é seu e não passou por verificação do Google. É normal.)
-4. **Implantar > Nova implantação** > engrenagem > **App da Web**:
-   - Executar como: **Eu**
-   - Quem pode acessar: **Qualquer pessoa**
-5. Clique em **Implantar** e copie o **URL do app da Web** (termina em `/exec`). Mande esse link para o Claude, que coloca na página.
-   (Ou edite você mesmo a linha `var API_URL = '';` do `index.html`.)
+Todo o script roda numa conta Gmail criada só para a campanha. A conta pessoal não dá nenhuma permissão.
 
-Os e-mails de confirmação saem do Gmail da conta que fez a implantação, com o nome
-"Cartinhas de Natal · Educandário São Luiz". Você recebe uma cópia oculta de cada um.
+1. Crie um Gmail para a campanha (ex.: cartinhas.educandario@gmail.com).
+2. Com a sua conta, compartilhe a planilha com esse Gmail como **Editor**.
+3. Abra uma **janela anônima** do navegador, entre com o Gmail da campanha e abra a planilha.
+4. **Extensões > Apps Script**. Apague o que estiver no `Código.gs` e cole o código de
+   [apps-script/Code.gs](https://raw.githubusercontent.com/thiagoflach/cartinhas-natal-educandario/main/apps-script/Code.gs). Salve.
+5. Escolha a função **testarLeitura** > **Executar** > Revisar permissões > conta da campanha >
+   Avançado > Acessar (não seguro) > marque as duas permissões > Permitir.
+   Ele pede só: esta planilha e enviar e-mail como a conta da campanha.
+6. **Implantar > Nova implantação** > engrenagem > **App da Web**. Executar como: **Eu**. Quem pode acessar: **Qualquer pessoa**. Implantar.
+7. Copie o **URL do app da Web** (termina em `/exec`) e coloque na linha `var API_URL = '';` do `index.html` (ou mande para o Claude).
+
+Os e-mails de confirmação saem do Gmail da campanha, com o nome "Cartinhas de Natal · Educandário São Luiz".
+Para receber uma cópia oculta de cada confirmação, preencha `EMAIL_COPIA` no Code.gs.
 
 ## Parte 2: GitHub Pages
 
